@@ -18,7 +18,7 @@ target_url= ("http://archive.ics.uci.edu/ml/machine-learning-databases/breast-ca
 col=['Id','Clump Thickness','Uniformity of Cell Size','Uniformity of Cell Shape','Marginal Adhesion',
                             'Single Epithelial Cell Size','Bare Nuclei','Bland Chromatin','Normal Nucleoli','Mitoses','Class']
 # read data into a DataFrame
-data = pd.read_csv("breast_cancer.txt",header=None, prefix="V")
+data = pd.read_csv(target_url,header=None, prefix="V")
 data.columns = col
 d = pd.DataFrame(data,columns=col)
 

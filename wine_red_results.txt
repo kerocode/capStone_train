@@ -1,0 +1,69 @@
+-------correlation matrix-------
+                      fixed acidity  volatile acidity  citric acid  \
+fixed acidity              1.000000         -0.256131     0.671703   
+volatile acidity          -0.256131          1.000000    -0.552496   
+citric acid                0.671703         -0.552496     1.000000   
+residual sugar             0.114777          0.001918     0.143577   
+chlorides                  0.093705          0.061298     0.203823   
+free sulfur dioxide       -0.153794         -0.010504    -0.060978   
+total sulfur dioxide      -0.113181          0.076470     0.035533   
+density                    0.668047          0.022026     0.364947   
+pH                        -0.682978          0.234937    -0.541904   
+sulphates                  0.183006         -0.260987     0.312770   
+alcohol                   -0.061668         -0.202288     0.109903   
+
+                      residual sugar  chlorides  free sulfur dioxide  \
+fixed acidity               0.114777   0.093705            -0.153794   
+volatile acidity            0.001918   0.061298            -0.010504   
+citric acid                 0.143577   0.203823            -0.060978   
+residual sugar              1.000000   0.055610             0.187049   
+chlorides                   0.055610   1.000000             0.005562   
+free sulfur dioxide         0.187049   0.005562             1.000000   
+total sulfur dioxide        0.203028   0.047400             0.667666   
+density                     0.355283   0.200632            -0.021946   
+pH                         -0.085652  -0.265026             0.070377   
+sulphates                   0.005527   0.371260             0.051658   
+alcohol                     0.042075  -0.221141            -0.069408   
+
+                      total sulfur dioxide   density        pH  sulphates  \
+fixed acidity                    -0.113181  0.668047 -0.682978   0.183006   
+volatile acidity                  0.076470  0.022026  0.234937  -0.260987   
+citric acid                       0.035533  0.364947 -0.541904   0.312770   
+residual sugar                    0.203028  0.355283 -0.085652   0.005527   
+chlorides                         0.047400  0.200632 -0.265026   0.371260   
+free sulfur dioxide               0.667666 -0.021946  0.070377   0.051658   
+total sulfur dioxide              1.000000  0.071269 -0.066495   0.042947   
+density                           0.071269  1.000000 -0.341699   0.148506   
+pH                               -0.066495 -0.341699  1.000000  -0.196648   
+sulphates                         0.042947  0.148506 -0.196648   1.000000   
+alcohol                          -0.205654 -0.496180  0.205633   0.093595   
+
+                       alcohol  
+fixed acidity        -0.061668  
+volatile acidity     -0.202288  
+citric acid           0.109903  
+residual sugar        0.042075  
+chlorides            -0.221141  
+free sulfur dioxide  -0.069408  
+total sulfur dioxide -0.205654  
+density              -0.496180  
+pH                    0.205633  
+sulphates             0.093595  
+alcohol               1.000000  
+accuracy :0.360551703039
+intercept_ :21.9652084495
+-----------------------------------------------------------------------------------------------------
+pair the feature names with the coefficients
+                       0          1
+0          fixed acidity   0.024991
+1       volatile acidity  -1.083590
+2            citric acid  -0.182564
+3         residual sugar   0.016331
+4              chlorides  -1.874225
+5    free sulfur dioxide   0.004361
+6   total sulfur dioxide  -0.003265
+7                density -17.881164
+8                     pH  -0.413653
+9              sulphates   0.916334
+10               alcohol   0.276198
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-

@@ -11,65 +11,60 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.cross_validation import train_test_split
 from sklearn import metrics
 from sklearn.cross_validation import cross_val_score
+from sklearn.linear_model import LinearRegression
 
 
-# breast_cancer_results = open('breast_cancer_results.txt','w')
+parkinson_disease_results = open('parkinson_disease_results.txt','w')
 target_url= ("http://archive.ics.uci.edu/ml/machine-learning-databases/parkinsons/telemonitoring/parkinsons_updrs.data")
-col=['subject#','age','sex ','test_time','motor_UPDRS','total_UPDRS','Jitter(%)','Jitter(Abs)','Normal Nucleoli','Mitoses','Class']
 
 # # read data into a DataFrame
 data = pd.read_csv(target_url)
-print data.head()
+motor_UPDRS = data[['motor_UPDRS']]
+total_UPDRS = data [['total_UPDRS']]
+X = data[['age','sex','test_time','Jitter(%)','Jitter(Abs)','Jitter(Abs)','Jitter:RAP','Jitter:PPQ5','Jitter:DDP','Shimmer',
+     'Shimmer(dB)','Shimmer:APQ3','Shimmer:APQ5','Shimmer:APQ11','Shimmer:DDA','NHR','HNR','RPDE','DFA','PPE']]
+_indent = Utilities.draw_whatever("-",6)
+#calculate correlation matrix
+corMat = DataFrame(data.iloc[:,2:].corr())
+parkinson_disease_results.writelines( _indent +'correlation matrix'+ _indent +'\n')
+parkinson_disease_results.writelines(str(corMat) +'\n')
+# instantiate a logistic regression model, and fit with X and y
+model_1 = LinearRegression()
+model_1 = model_1.fit(X, motor_UPDRS.values.ravel())
 
-# d['Type'] = 'benign'
-# # map Type to 0 if class is 2 and 1 if class is 4
-# d['Type'] = d.Class.map({2:0, 4:1})
-# X = d[['Clump Thickness','Uniformity of Cell Size','Uniformity of Cell Shape','Marginal Adhesion',
-#                             'Single Epithelial Cell Size','Bare Nuclei','Bland Chromatin','Normal Nucleoli','Mitoses']]
-# y=d[['Type']]
-# _indent = Utilities.draw_whatever("-",6)
-# #calculate correlation matrix
-# corMat = DataFrame(d.iloc[:,2:10].corr())
-# breast_cancer_results.writelines( _indent +'correlation matrix'+ _indent +'\n')
-# breast_cancer_results.writelines(str(corMat) +'\n')
-# # instantiate a logistic regression model, and fit with X and y
-# model = LogisticRegression()
-# model = model.fit(X, y.values.ravel())
-#
-# # check the accuracy on the training set
-# score = model.score(X, y)
-# breast_cancer_results.write("accuracy :"+ str(score) +'\n')
-# breast_cancer_results.writelines(" what percentage had malignant?\n")
-# breast_cancer_results.write(str(y.mean())+'\n')
-# breast_cancer_results.write(Utilities.draw_whatever("-",100)+'\n')
-# # examine the coefficients
-# _coef= pd.DataFrame(zip(X, np.transpose(model.coef_)))
-# breast_cancer_results.writelines(str(_coef)+'\n')
-# breast_cancer_results.write(Utilities.draw_whatever("+-",100)+'\n')
-#
-# # evaluate the model using 10-fold cross-validation
-# score_cv = cross_val_score(LogisticRegression(), X, y.values.ravel(), scoring='accuracy', cv=10)
-# breast_cancer_results.write("accuracy :"+ str(score_cv) +'\n')
-# breast_cancer_results.writelines("average accuracy : " + str(score_cv.mean())+"\n")
-#
-# breast_cancer_results.write(Utilities.draw_whatever("+-",100)+'\n')
-#
-# # evaluate the model by splitting into train and test sets
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-# model2 = LogisticRegression()
-# model2.fit(X_train, y_train)
-# # predict class labels for the test set
-# predicted = model2.predict(X_test)
-# #confusion  matrix
-# confusion_matrix = metrics.confusion_matrix(y_test, predicted)
-# report = metrics.classification_report(y_test, predicted)
-# breast_cancer_results.writelines(str(confusion_matrix)+"\n")
-# breast_cancer_results.writelines('TP: '+ str(confusion_matrix[0][0])+"\n")
-# breast_cancer_results.writelines('TN: '+ str(confusion_matrix[1][1])+"\n")
-# breast_cancer_results.writelines('FN: '+ str(confusion_matrix[1][0])+"\n")
-# breast_cancer_results.writelines('FP: '+ str(confusion_matrix[0][1])+"\n")
-#
-# breast_cancer_results.write(Utilities.draw_whatever("+-",100)+'\n')
-#
-# breast_cancer_results.writelines(str(report)+'\n')
-#
+parkinson_disease_results.writelines(_indent + "motor_UPDRS \n" + _indent)
+# check the accuracy on the training set
+score_1 = model_1.score(X, motor_UPDRS.values.ravel())
+parkinson_disease_results.write("accuracy :"+ str(score_1) +'\n')
+
+# print intercept and coefficients
+parkinson_disease_results.write("intercept_ :"+ str(model_1.intercept_) +'\n')
+
+parkinson_disease_results.write(Utilities.draw_whatever("-",100)+'\n')
+# examine the coefficients
+# pair the feature names with the coefficients
+parkinson_disease_results.write('pair the feature names with the coefficients'+'\n')
+_coef= pd.DataFrame(zip(X, model_1.coef_))
+parkinson_disease_results.writelines(str(_coef)+'\n')
+parkinson_disease_results.write(Utilities.draw_whatever("+-*",200)+'\n')
+
+
+# instantiate a logistic regression model, and fit with X and y
+model_2 = LinearRegression()
+model_2 = model_2.fit(X, total_UPDRS.values.ravel())
+
+parkinson_disease_results.writelines(_indent + "total_UPDRS \n" + _indent)
+# check the accuracy on the training set
+score_2 = model_2.score(X, total_UPDRS.values.ravel())
+parkinson_disease_results.write("accuracy :"+ str(score_2) +'\n')
+
+# print intercept and coefficients
+parkinson_disease_results.write("intercept_ :"+ str(model_2.intercept_) +'\n')
+
+parkinson_disease_results.write(Utilities.draw_whatever("-",100)+'\n')
+# examine the coefficients
+# pair the feature names with the coefficients
+parkinson_disease_results.write('pair the feature names with the coefficients'+'\n')
+_coef= pd.DataFrame(zip(X, model_2.coef_))
+parkinson_disease_results.writelines(str(_coef)+'\n')
+parkinson_disease_results.write(Utilities.draw_whatever("+-*",200)+'\n')
